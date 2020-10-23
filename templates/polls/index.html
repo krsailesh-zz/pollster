@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Pollster
+{% endblock %}
+
+{% block content %} 
+    <h2 class="text-center">Poll Question</h2>
+
+    {% if latest_quetion_list %}
+        {% for question in latest_quetion_list %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p class="lead">{{question.question_text}}</p>
+
+                    <!-- <a href="/polls/{{question.id}}" class="btn btn-sm btn-primary">Vote Now</a> -->
+                    <!-- also written as -->
+                    <a href="{% url 'polls:detail' question.id %}" class="btn btn-sm btn-primary">Vote Now</a>
+                    <a href="{% url 'polls:results' question.id %}" class="btn btn-sm btn-secondary">Results</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        'Poll not available'
+    {% endif %}
+{% endblock %}
